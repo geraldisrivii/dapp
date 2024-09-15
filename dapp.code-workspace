@@ -1,0 +1,34 @@
+{
+  "folders": [
+    {
+      "name": "Root",
+      "path": "."
+    },
+    {
+      "name": "🚀 Frontend",
+      "path": "apps/frontend"
+    },
+    {
+      "name": "🔗 Chain",
+      "path": "apps/chain"
+    },
+  ],
+  "settings": {
+    "git.ignoreLimitWarning": true,
+    "terminal.integrated.cwd": "",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "scss.scanImportedFiles": false,
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      ".yarn": true,
+      ".idea": true,
+      ".vscode": true
+    }
+  }
+}
