@@ -1,9 +1,10 @@
 {
   "name": "hardhat",
-  "packageManager": "yarn@1.22.22",
   "private": true,
   "version": "1.0.0",
-  "homepage": "./",
+  "scripts": {
+    "dev": "npx hardhat node"
+  },
   "dependencies": {
     "hardhat": "^2.22.8"
   },

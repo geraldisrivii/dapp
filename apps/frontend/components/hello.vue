@@ -32,6 +32,7 @@ import {
   sendTransaction,
   writeContract,
 } from "@wagmi/vue/actions";
+import type { CreateUserDTO } from "@dapp/dto/dto.user";
 // import { sendTransaction } from "@wagmi/vue/actions";
 import { etherUnits, getContract, parseEther } from "viem";
 import { demoAbi } from "~/abi/demo";
@@ -46,6 +47,11 @@ const { $config } = useNuxtApp();
 console.log($config.public.DEMO_CONTRACT_ADDRESS);
 
 // const {} = useSimulateContract();
+
+const someVar: CreateUserDTO = {
+  email: "a@a.com",
+  password: "dasdsa",
+};
 
 async function getStr() {
   const contract = getContract({

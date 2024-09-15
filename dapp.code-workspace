@@ -12,6 +12,14 @@
       "name": "🔗 Chain",
       "path": "apps/chain"
     },
+    {
+      "name": "🌐 Backend",
+      "path": "apps/backend"
+    },
+    {
+      "name": "📦 DTO",
+      "path": "internal/dto"
+    },
   ],
   "settings": {
     "git.ignoreLimitWarning": true,

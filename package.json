@@ -1,0 +1,14 @@
+{
+  "name": "root",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "internal/*"
+  ],
+  "packageManager": "yarn@1.22.2",
+  "scripts": {
+    "dev:landing": "yarn workspace @dapp/landing dev",
+    "dev:chain": "yarn workspace hardhat dev"
+  }
+}
