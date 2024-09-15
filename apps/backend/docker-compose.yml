@@ -17,12 +17,8 @@ services:
     container_name: postgres
     image: postgres
     environment:
-      PG_DATA: /var/lib/postgresql/data
-      POSTGRES_PASSWORD: secret
-    ports:
-      - 3306:3306
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+      POSTGRES_DB: 'nest'
+      POSTGRES_PASSWORD: 'root'
     restart: always
   adminer:
     image: adminer
