@@ -6,9 +6,9 @@ services:
     build:
       context: .
     volumes:
-      - .:/app
+      - ../../:/app
     ports:
-      - 5000:5000
+      - 3001:3000
     command: npm run start:dev
     depends_on:
       - postgres
@@ -24,6 +24,13 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: always
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      - ADMINER_DEFAULT_SERVER=postgres
+    ports:
+      - 8080:8080
 
 volumes:
   pgdata:
