@@ -2,15 +2,27 @@
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./",
+    "target": "ESNext",
+    "module": "ESNext",
     "paths": {
       "@dapp/*": ["../../internal/*"],
       "~/*": ["./*"]
     },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
   },
   "references": [
     {
-      "path": "../../internal/dto/tsconfig.json"
+      "path": "../../internal/dto"
+    },
+    {
+      "path": "../../internal/configs"
+    },
+    {
+      "path": "../../internal/vite"
     }
   ]
 }

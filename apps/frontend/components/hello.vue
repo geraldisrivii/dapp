@@ -1,59 +1,50 @@
 <template>
-  <div>
-    <button
-      v-for="connector in connectors"
-      :key="connector.id"
-      @click="
-        connect({
-          connector,
-        })
-      "
-    >
-      {{ connector.name }}
-    </button>
+  <lazy-client-only>
+    <div class="p-4 text-center flex flex-col">
+      <button
+        v-for="connector in connectors"
+        :key="connector.id"
+        @click="
+          connect({
+            connector,
+          })
+        "
+      >
+        {{ connector.name }}
+      </button>
 
-    <p>{{ address }}</p>
+      <p>{{ address }}</p>
 
-    <button @click="getStr">getStr</button>
-    <button @click="Pay">Pay</button>
-  </div>
+      <button @click="getStr" class="text-3xl font-bold underline">
+        getStr
+      </button>
+      <button @click="Pay">Pay</button>
+    </div>
+  </lazy-client-only>
 </template>
 
 <script setup lang="ts">
-import {
-  useAccount,
-  useConnect,
-  useSimulateContract,
-  useWriteContract,
-} from "@wagmi/vue";
+import { useAccount, useConnect } from "@wagmi/vue";
 import {
   getClient,
+  getPublicClient,
   getWalletClient,
-  sendTransaction,
-  writeContract,
 } from "@wagmi/vue/actions";
 import type { CreateUserDTO } from "@dapp/dto/dto.user";
-// import { sendTransaction } from "@wagmi/vue/actions";
 import { etherUnits, getContract, parseEther } from "viem";
 import { demoAbi } from "~/abi/demo";
 import { config } from "~/configs/configs.wagmi";
-// import { sendTransaction } from "viem/actions";
 
 const { connectors, connect } = useConnect();
+
 const { address } = useAccount();
 
 const { $config } = useNuxtApp();
 
 console.log($config.public.DEMO_CONTRACT_ADDRESS);
 
-// const {} = useSimulateContract();
-
-const someVar: CreateUserDTO = {
-  email: "a@a.com",
-  password: "dasdsa",
-};
-
 async function getStr() {
+  console.log();
   const contract = getContract({
     address: $config.public.DEMO_CONTRACT_ADDRESS as `0x${string}`,
     abi: demoAbi,
@@ -65,7 +56,22 @@ async function getStr() {
   console.log(data);
 }
 
+onMounted(() => {
+  const client = getPublicClient(config);
+
+  client.watchContractEvent({
+    abi: demoAbi,
+    address: $config.public.DEMO_CONTRACT_ADDRESS as `0x${string}`,
+    eventName: "Paid",
+    onLogs: (data) => {
+      console.log(data);
+    },
+  });
+});
+
 async function Pay() {
+  const client = getPublicClient(config);
+
   const contract = getContract({
     address: $config.public.DEMO_CONTRACT_ADDRESS as `0x${string}`,
     abi: demoAbi,
@@ -75,8 +81,6 @@ async function Pay() {
   const data = await contract.write.pay([], {
     value: parseEther("1"),
   });
-
-  console.log(data);
 }
 
 // async function sendTransact() {
@@ -87,4 +91,4 @@ async function Pay() {
 // }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss"></style>

@@ -1,5 +1,15 @@
+<script setup lang="ts">
+
+</script>
+
+
 <template>
-  <div>
-    <hello />
-  </div>
+  <nuxt-layout>
+    <nuxt-page />
+  </nuxt-layout>
 </template>
+
+<style lang="scss">
+@import './scss/general.scss';
+
+</style>

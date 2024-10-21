@@ -8,10 +8,4 @@ export default defineNuxtPlugin((NuxtApp) => {
   NuxtApp.vueApp
     .use(WagmiPlugin, { config })
     .use(VueQueryPlugin, { queryClient });
-
-  return {
-    provide: {
-      aos: () => "hello",
-    },
-  };
 });

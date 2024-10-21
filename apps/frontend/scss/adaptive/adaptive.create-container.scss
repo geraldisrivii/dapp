@@ -1,0 +1,7 @@
+
+
+@mixin create-container($max-width: 900px, $padding: 0px 10px) {
+  max-width: $max-width;
+  padding: $padding;
+  margin: 0 auto;
+}

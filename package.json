@@ -9,6 +9,9 @@
   "packageManager": "yarn@1.22.2",
   "scripts": {
     "dev:landing": "yarn workspace @dapp/landing dev",
-    "dev:chain": "yarn workspace hardhat dev"
+    "dev:chain": "yarn workspace hardhat dev",
+    "chain:deploy": "yarn workspace hardhat deploy",
+    "chain:clean": "yarn workspace hardhat clean",
+    "dev:backend": "yarn workspace @dapp/backend docker:start"
   }
 }

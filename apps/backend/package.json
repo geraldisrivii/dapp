@@ -1,9 +1,10 @@
 {
-  "name": "project-name",
+  "name": "@dapp/backend",
   "version": "0.0.1",
   "description": "",
   "author": "",
   "private": true,
+  "type": "commonjs",
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
@@ -17,20 +18,26 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "docker:start": "docker-compose up"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.2.3",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/sequelize": "^10.0.1",
     "@types/sequelize": "^4.28.20",
+    "@wagmi/vue": "^0.0.44",
+    "ethers": "^6.13.2",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "sequelize": "^6.37.3",
-    "sequelize-typescript": "^2.1.6"
+    "sequelize-typescript": "^2.1.6",
+    "viem": "^2.21.7",
+    "wagmi": "^2.12.11"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

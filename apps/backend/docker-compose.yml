@@ -3,30 +3,30 @@ version: '3.0'
 services:
   main:
     container_name: main
+    network_mode: "host"
     build:
       context: .
     volumes:
       - ../../:/app
-    ports:
-      - 3001:3000
     command: npm run start:dev
     depends_on:
       - postgres
     restart: always
   postgres:
     container_name: postgres
+    network_mode: "host"
     image: postgres
     environment:
+      POSTGRES_USER: 'root'
       POSTGRES_DB: 'nest'
       POSTGRES_PASSWORD: 'root'
     restart: always
   adminer:
     image: adminer
     restart: always
+    network_mode: "host"
     environment:
       - ADMINER_DEFAULT_SERVER=postgres
-    ports:
-      - 8080:8080
 
 volumes:
   pgdata:

@@ -8,7 +8,7 @@ contract Demo {
     string str = "dasdsa";
     address owner;
 
-    // event Paid(address indexed _from, uint _value, uint timestamp);
+    event Paid(address indexed _from, uint _value, uint timestamp);
 
     constructor() {
         owner = msg.sender;
@@ -19,6 +19,7 @@ contract Demo {
     }
 
     function pay() public payable {
+        emit Paid(msg.sender, msg.value, block.timestamp);
     }
 
     function widtdrawAll(address payable _to) external {

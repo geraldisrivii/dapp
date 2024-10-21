@@ -11,14 +11,27 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/image": "^1.5.0",
+    "@nuxtjs/google-fonts": "^3.2.0",
     "@tanstack/vue-query": "^5.56.2",
+    "@vee-validate/nuxt": "^4.14.3",
+    "@vueuse/core": "^11.1.0",
     "@wagmi/core": "^2.13.5",
     "@wagmi/vue": "^0.0.44",
+    "autoprefixer": "^10.4.20",
+    "axios": "^1.7.7",
     "dotenv": "^16.4.5",
     "nuxt": "^3.13.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "vee-validate": "^4.14.3",
     "viem": "2.x",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vue-safe-teleport": "^0.1.2"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "devDependencies": {
+    "sass-embedded": "^1.79.4"
+  }
 }

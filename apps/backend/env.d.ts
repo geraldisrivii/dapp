@@ -1,0 +1,11 @@
+import { Dialect } from "sequelize";
+
+export {}
+
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      DATABASE_DIALECT: Dialect;
+    }
+  }
+}

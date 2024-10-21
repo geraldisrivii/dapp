@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "composite": true,
+    "jsx": "preserve",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "strict": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["vite/client"],
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": ".",
+    "paths": {
+      "~/*": ["./*"]
+    }
+  },
+  "include": ["./**/*"],
+  "exclude": ["node_modules", "dist", "nuxt.js"],
+  "files": ["auto-imports.d.ts", "global.d.ts"]
+}

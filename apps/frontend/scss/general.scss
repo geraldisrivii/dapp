@@ -1,0 +1,52 @@
+// tailwind
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+// another
+@import "./reset.scss";
+
+@layer base {
+  .container {
+    @apply max-w-[1340px] mx-auto max-sm:px-5 static !important;
+  }
+  .container-1140 {
+    @apply mx-auto container;
+
+    @media (min-width: 1140px) {
+      @apply max-w-[1140px] mx-auto !important;
+    }
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include sm {
+    > span {
+      &:not(:last-child){
+        margin-right: 0.5ch;
+      }
+    }
+    > br {
+      display: none;
+    }
+  }
+}
+
+html {
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  // font-size: 18px;
+  background-color: $light-sections-color;
+}
+
+.bg-img {
+  @apply w-full h-full object-cover object-bottom absolute top-0 left-0;
+  z-index: -1;
+}

@@ -1,0 +1,11 @@
+.h1 {
+  @apply font-bold font-sherif text-4xl lg:text-5xl max-sm:text-3xl;
+
+  line-height: 120%;
+}
+
+.h2 {
+  @apply font-bold font-sherif text-3xl lg:text-[32px];
+
+  line-height: 120%;
+}
