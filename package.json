@@ -13,5 +13,8 @@
     "chain:deploy": "yarn workspace hardhat deploy",
     "chain:clean": "yarn workspace hardhat clean",
     "dev:backend": "yarn workspace @dapp/backend docker:start"
+  },
+  "dependencies": {
+    "pinia": "^2.2.5"
   }
 }

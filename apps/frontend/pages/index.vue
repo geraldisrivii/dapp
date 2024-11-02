@@ -1,5 +1,6 @@
 <template>
   <main class="page">
+    <hello />
     <scoped-sections-intro />
     <scoped-sections-features />
     <scoped-sections-caregories />

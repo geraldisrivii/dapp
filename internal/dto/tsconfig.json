@@ -6,10 +6,7 @@
     "allowJs": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "paths": {
-      "~/*": ["./*"]
-    }
+    "esModuleInterop": true
   },
   "include": ["./**/*"],
   "exclude": ["node_modules", "dist"]

@@ -23,6 +23,9 @@
     },
     {
       "path": "../../internal/vite"
-    }
+    },
+    {
+      "path": "../../internal/event-source"
+    },
   ]
 }

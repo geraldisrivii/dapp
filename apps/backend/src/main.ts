@@ -1,26 +1,31 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import cors from 'cors';
 
-import { Abi, createPublicClient, http } from 'viem';
-import { hardhat, mainnet } from 'viem/chains';
-
-import { demoAbi } from '@internal/abi/abi.demo';
-
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
+import { ProjectValidationPipe } from '~/pipes/pipes.validation';
 
 async function bootstrap() {
-  const publicClient = createPublicClient({
-    chain: hardhat,
-    transport: http(),
-  });
-
-  const unwatch = publicClient.watchContractEvent({
-    address: '0x5fbdb2315678afecb367f032d93f642f64180aa3',
-    abi: demoAbi,
-    eventName: 'Paid',
-    onLogs: (logs) => console.log(logs),
-  });
-
   const app = await NestFactory.create(AppModule);
+
+  const env = new ConfigService();
+
+  const config = new DocumentBuilder()
+    .setTitle('ETH freelance platform API')
+    .setDescription('API description')
+    .setVersion(env.get('APP_VERSION')!)
+    .build();
+
+  app.useGlobalPipes(new ProjectValidationPipe());
+
+  app.enableCors({
+    origin: '*',
+  });
+  
+  const document = SwaggerModule.createDocument(app, config);
+
+  SwaggerModule.setup('/api/docs', app, document);
 
   await app.listen(3002);
 }

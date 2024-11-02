@@ -32,12 +32,14 @@ import {
 } from "@wagmi/vue/actions";
 import type { CreateUserDTO } from "@dapp/dto/dto.user";
 import { etherUnits, getContract, parseEther } from "viem";
-import { demoAbi } from "~/abi/demo";
 import { config } from "~/configs/configs.wagmi";
+import {demoAbi} from "@dapp/abi/abi.demo";
 
 const { connectors, connect } = useConnect();
 
 const { address } = useAccount();
+
+
 
 const { $config } = useNuxtApp();
 
@@ -82,13 +84,6 @@ async function Pay() {
     value: parseEther("1"),
   });
 }
-
-// async function sendTransact() {
-//   sendTransaction(config, {
-//     to: $config.public.DEMO_CONTRACT_ADDRESS as `0x${string}`,
-//     value: parseEther("1"),
-//   });
-// }
 </script>
 
 <style lang="scss"></style>

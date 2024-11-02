@@ -7,7 +7,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       DEMO_CONTRACT_ADDRESS: process.env.DEMO_CONTRACT_ADDRESS,
-      API_URL: process.env.API_URL,
     },
   },
 
@@ -79,7 +78,7 @@ export default defineNuxtConfig({
         modules: [
           {
             name: "Re-worked internal packages",
-            repositoryDirectories: ["dto", "configs", "vite"],
+            repositoryDirectories: ["dto", "configs", "vite", "event-source"],
             workspaceDirectory: "internal",
           },
         ],
@@ -88,13 +87,14 @@ export default defineNuxtConfig({
       }),
       useStringTransformer({
         SERVER_API_ENDPOINT: () => {
-          return process.env.SERVER_API_ENDPOINT as string;
+          return process.env.SERVER_API_ENDPOINT;
         },
       }),
     ],
   },
 
   modules: [
+    '@pinia/nuxt',
     "@nuxt/image",
     "@nuxtjs/google-fonts",
     "@vee-validate/nuxt",
