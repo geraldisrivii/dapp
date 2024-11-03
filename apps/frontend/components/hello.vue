@@ -43,10 +43,7 @@ const { address } = useAccount();
 
 const { $config } = useNuxtApp();
 
-console.log($config.public.DEMO_CONTRACT_ADDRESS);
-
 async function getStr() {
-  console.log();
   const contract = getContract({
     address: $config.public.DEMO_CONTRACT_ADDRESS as `0x${string}`,
     abi: demoAbi,
@@ -54,23 +51,7 @@ async function getStr() {
   });
 
   const data = await contract.read.getStr();
-
-  console.log(data);
 }
-
-onMounted(() => {
-  const client = getPublicClient(config);
-
-  client.watchContractEvent({
-    abi: demoAbi,
-    address: $config.public.DEMO_CONTRACT_ADDRESS as `0x${string}`,
-    eventName: "Paid",
-    onLogs: (data) => {
-      console.log(data);
-    },
-  });
-});
-
 async function Pay() {
   const client = getPublicClient(config);
 

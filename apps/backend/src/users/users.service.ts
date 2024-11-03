@@ -1,10 +1,10 @@
-
 import { Body, HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Role } from '~/roles/roles.model';
 import { RolesService } from '~/roles/roles.service';
 import { CreateUser, User } from '~/users/users.model';
 import * as bcrypt from 'bcryptjs';
+import { Address } from 'viem';
 
 @Injectable()
 export class UsersService {
@@ -33,19 +33,18 @@ export class UsersService {
     return user;
   }
 
+  async getUserByAddress(address: Address) {
+    return this.userRepository.findOne({
+      where: { address },
+      include: { all: true },
+    });
+  }
+
   async getUserByEmail(email: string) {
     return this.userRepository.findOne({
       where: { email },
       include: { all: true },
     });
-  }
-
-  async validPassword(user: User, password: string) {
-    return bcrypt.compare(password, user.password);
-  }
-
-  validPasswordSync(user: User, password: string) {
-    return bcrypt.compareSync(password, user.password);
   }
 
   // async addRole(dto: AddUserRoleDTO) {

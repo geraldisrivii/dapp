@@ -38,3 +38,10 @@ export function SwaggerBoolean(description?: string) {
     return ApiProperty({ example: 'true', description })(...args);
   };
 }
+
+export function SwaggerAddress(description?: string) {
+  return function (...args: Parameters<PropertyDecorator>) {
+    return ApiProperty({ example: '0x65374Fb4bB7e813d8C37...244bA5EDFB019eD0', description })(...args);
+  };
+}
+

@@ -11,11 +11,14 @@ import { SwaggerID, SwaggerValue } from '~/swager/swager.decorators';
 import { User } from '~/users/users.model';
 import { UsersRoles } from '~/user_roles/users_roles.model';
 import { UserDTO } from '@internal/dto/dto.user';
+import { IsString } from 'class-validator';
 
 export class CreateRole implements CreateRoleDTO {
+  @IsString()
   @SwaggerValue()
   value: string;
 
+  @IsString()
   @ApiProperty({ example: 'role description', description: 'Role description' })
   description: string;
 }
@@ -38,7 +41,7 @@ export class Role extends Model<Role, CreateRole> implements RoleDTO {
   @ApiProperty({ example: 'Admininstrator', description: 'Role description' })
   @Column({ type: DataType.STRING, allowNull: false })
   description: string;
-  
+
   @BelongsToMany(() => User, () => UsersRoles)
   users: UserDTO[];
 }

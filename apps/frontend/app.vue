@@ -1,12 +1,4 @@
-<script setup lang="ts">
-import { addEventCallback, event } from "~/libs/event-source";
-
-onMounted(() => {
-  event("test", "/users/sse", () => {
-    console.log("test");
-  });
-});
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <nuxt-layout>

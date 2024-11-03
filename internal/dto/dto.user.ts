@@ -1,16 +1,19 @@
+import { Address } from "viem";
 import { RoleDTO } from "./dto.role";
 
 export interface CreateUserDTO {
   email: string;
-  password: string;
+}
+
+export interface SignUpByWalletDTO {
+  address: Address;
+  signature: Address;
 }
 
 export interface UserDTO {
   id: number;
 
   email: string;
-
-  password: string;
 
   banned: boolean;
 

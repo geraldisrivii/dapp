@@ -34,6 +34,9 @@ class EnvironmentVariables {
 
   @IsString()
   APP_JWT_SECRET: string;
+
+  @IsString()
+  DATABASE_URL: string;
 }
 
 export function validate(config: Record<string, unknown>) {

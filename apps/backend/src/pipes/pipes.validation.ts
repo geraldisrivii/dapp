@@ -4,13 +4,11 @@ import { validate } from 'class-validator';
 
 export class ProjectValidationPipe implements PipeTransform<Promise<any>> {
   async transform(value: any, metadata: ArgumentMetadata) {
-    console.log(value, metadata);
+    
     const obj = plainToInstance(metadata.metatype!, value);
-
+    
     const errors = await validate(obj);
-
-    console.log(errors);
-
+    
     if (errors.length) {
       throw new HttpException(
         {

@@ -1,24 +1,16 @@
 <script setup lang="ts">
+import { getWalletClient } from "@wagmi/core";
+import { useAccount } from "@wagmi/vue";
 import { getModalById } from "~/components/modal";
+import { config } from "~/configs/configs.wagmi";
 import { connectors } from "~/constants/constants.connectors";
 import { PLATE_WALLET_CONNECT } from "~/constants/constants.plates";
+import { singup } from "~/routes/routes.auth";
 import type { VisibleConnector } from "~/types/constants/types-constants.connectors";
 
 const modal = getModalById(PLATE_WALLET_CONNECT);
 
-const { isInstalled, getInstalledConnector } = useConnectors();
-
-const onClick = (connector: VisibleConnector) => {
-  const installedConnector = getInstalledConnector(connector);
-
-  if (!installedConnector.value) {
-    return;
-  }
-
-  installedConnector.value.connect().then(() => {
-    modal?.setState(false);
-  });
-};
+const { isInstalled, connect } = useConnectors();
 </script>
 
 <template>
@@ -31,7 +23,7 @@ const onClick = (connector: VisibleConnector) => {
       class="w-full max-w-[500px] md:w-[500px] min-h-[300px] flex flex-col gap-2.5 pt-[30px]"
     >
       <button
-        @click="onClick(connector)"
+        @click="connect(connector)"
         class="flex justify-between items-center p-2.5 border rounded-md border-gray-500"
         v-for="connector in connectors"
         :key="connector.name"

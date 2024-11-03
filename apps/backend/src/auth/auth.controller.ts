@@ -1,8 +1,7 @@
-import { Body, Controller, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Response } from 'express';
 import { AuthService } from '~/auth/auth.service';
-import { CreateUser } from '~/users/users.model';
+import { SignupByWallet } from '~/users/users.model';
 import { Auth } from '~/auth/auth.model';
 
 @ApiTags('Auth')
@@ -12,7 +11,7 @@ export class AuthController {
 
   @ApiResponse({ status: 200, type: Auth })
   @Post('/signup')
-  registartion(@Body() dto: CreateUser) {
-    return this.authService.register(dto);
+  registartion(@Body() dto: SignupByWallet) {
+    return this.authService.signupByWallet(dto);
   }
 }

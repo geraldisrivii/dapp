@@ -19,14 +19,9 @@ const config = new ConfigService();
       envFilePath: `.${process.env.NODE_ENV}.env`,
     }),
     SequelizeModule.forRoot({
-      dialect: config.get('DATABASE_DIALECT') || 'postgres',
-      host: config.get('DATABASE_HOST') || 'localhost',
-      port: config.get('DATABASE_PORT') || 5432,
-      username: config.get('DATABASE_USERNAME') || 'root',
-      password: config.get('DATABASE_PASSWORD') || 'root',
-      database: config.get('DATABASE_NAME') || 'nest',
-      autoLoadModels: true,
-      synchronize: true,
+      uri:
+        config.get('DATABASE_URL') ||
+        'postgres://root:root@localhost:5432/nest',
       models: [User, Role, UsersRoles],
     }),
     UsersModule,
