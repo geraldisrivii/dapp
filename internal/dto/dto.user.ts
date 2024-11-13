@@ -2,7 +2,7 @@ import { Address } from "viem";
 import { RoleDTO } from "./dto.role";
 
 export interface CreateUserDTO {
-  email: string;
+  address: string;
 }
 
 export interface SignUpByWalletDTO {
@@ -19,7 +19,7 @@ export interface UserDTO {
 
   bannedReason: string;
 
-  roles: RoleDTO[];
+  role: RoleDTO;
 }
 
 export interface RelatedUserDTO extends Omit<UserDTO, "roles"> {}

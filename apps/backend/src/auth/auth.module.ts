@@ -21,5 +21,6 @@ const config = new ConfigService();
     }),
     forwardRef(() => UsersModule),
   ],
+  exports: [JwtModule],
 })
 export class AuthModule {}

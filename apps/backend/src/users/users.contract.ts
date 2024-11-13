@@ -26,14 +26,6 @@ export class UsersContract implements IContract {
       transport: http(),
     });
 
-    const user = await this.usersService.getUserByEmail(
-      'dsdsds@gma32356idsldsa.com',
-    );
-
-    if (!user) {
-      throw new Error('User not found');
-    }
-
     const contract = getContract({
       address: '0x5fbdb2315678afecb367f032d93f642f64180aa3',
       abi: demoAbi,

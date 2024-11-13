@@ -1,16 +1,12 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from '~/users/users.model';
-import { Role } from '~/roles/roles.model';
-import { UsersRoles } from '~/user_roles/users_roles.model';
-import { RolesModule } from '~/roles/roles.module';
 import { AuthModule } from '~/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { UsersContract } from '~/users/users.contract';
-
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from '~/users/users.model';
 
 const config = new ConfigService();
 
@@ -24,8 +20,7 @@ const config = new ConfigService();
         expiresIn: '24h',
       },
     }),
-    SequelizeModule.forFeature([User, Role, UsersRoles]),
-    RolesModule,
+    TypeOrmModule.forFeature([User]),
     forwardRef(() => AuthModule),
   ],
   exports: [UsersService],

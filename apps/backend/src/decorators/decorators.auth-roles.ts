@@ -1,9 +1,10 @@
+import { RoleDTO } from '@internal/dto/dto.role';
 import { ExecutionContext } from '@nestjs/common';
 import { UsersController } from '~/users/users.controller';
 
 const endpoint_roles: Record<string, Array<string>> = {};
 
-export function UseRoles(...roles: string[]) {
+export function UseRoles(...roles: RoleDTO[]) {
   return function (
     target: any,
     propertyKey: string,
@@ -20,7 +21,7 @@ export function getEndpointRoles(context: ExecutionContext) {
   );
 }
 
-export function matchSomeEndpointRole(context: ExecutionContext, role: string) {
+export function matchSomeEndpointRole(context: ExecutionContext, role: RoleDTO) {
   const roles = getEndpointRoles(context);
 
   if (roles.includes(role)) {

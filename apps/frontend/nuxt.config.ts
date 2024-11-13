@@ -78,7 +78,7 @@ export default defineNuxtConfig({
         modules: [
           {
             name: "Re-worked internal packages",
-            repositoryDirectories: ["dto", "configs", "vite", "event-source"],
+            repositoryDirectories: ["dto", "configs", "vite"],
             workspaceDirectory: "internal",
           },
         ],

@@ -1,10 +1,3 @@
-import {
-  BelongsToMany,
-  Column,
-  DataType,
-  Model,
-  Table,
-} from 'sequelize-typescript';
 import { CreateUserDTO, SignUpByWalletDTO, UserDTO } from '@dapp/dto/dto.user';
 import { ApiProperty } from '@nestjs/swagger';
 import {
@@ -15,17 +8,16 @@ import {
   SwaggerPassword,
   SwaggerValue,
 } from '~/swager/swager.decorators';
-import { Role } from '~/roles/roles.model';
-import { UsersRoles } from '~/user_roles/users_roles.model';
 import { RoleDTO } from '@internal/dto/dto.role';
 import { IsEmail, IsString, Length } from 'class-validator';
 import { Address, isAddress } from 'viem';
 import { IsAddress } from '~/validation/validation.address';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 export class CreateUser implements CreateUserDTO {
-  @SwaggerEmail()
-  @IsEmail()
-  email: string;
+  @SwaggerAddress()
+  @IsAddress()
+  address: Address;
 }
 
 export class SignupByWallet implements SignUpByWalletDTO {
@@ -37,35 +29,31 @@ export class SignupByWallet implements SignUpByWalletDTO {
   signature: Address;
 }
 
-@Table({ tableName: 'users' })
-export class User extends Model<User, CreateUser> implements UserDTO {
+@Entity({
+  name: 'users',
+})
+export class User implements UserDTO {
   @SwaggerID()
-  @Column({
-    type: DataType.INTEGER,
-    unique: true,
-    autoIncrement: true,
-    primaryKey: true,
-  })
+  @PrimaryGeneratedColumn()
   id: number;
 
   @SwaggerEmail()
-  @Column({ type: DataType.STRING, unique: true, allowNull: false })
+  @Column({ unique: true, nullable: true, type: 'varchar' })
   email: string;
 
   @SwaggerAddress()
   @IsAddress()
-  @Column({ type: DataType.STRING, unique: true, allowNull: false })
+  @Column({ unique: true, nullable: false, type: 'varchar' })
   address: Address;
 
+  @Column({ type: 'enum', enum: RoleDTO, default: RoleDTO.EMPLOYEE })
+  role: RoleDTO;
+
   @SwaggerBoolean()
-  @Column({ type: DataType.BOOLEAN, defaultValue: false })
+  @Column({ type: 'boolean', default: false })
   banned: boolean;
 
   @ApiProperty({ example: 'some reason', description: 'User ban reason' })
-  @Column({ type: DataType.STRING, allowNull: true })
+  @Column({ type: 'varchar', nullable: true })
   bannedReason: string;
-
-  @ApiProperty({ type: [Role], description: 'User roles' })
-  @BelongsToMany(() => Role, () => UsersRoles)
-  roles: RoleDTO[];
 }

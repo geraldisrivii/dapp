@@ -7,12 +7,10 @@ import {
   Min,
   validateSync,
 } from 'class-validator';
-import { Dialect } from 'sequelize';
-import { DialectEnum } from './types/types.dialect';
 
 class EnvironmentVariables {
-  @IsEnum(DialectEnum)
-  DATABASE_DIALECT: Dialect;
+  @IsString()
+  DATABASE_DIALECT: string;
 
   @IsString()
   DATABASE_HOST: string;

@@ -32,7 +32,7 @@ export class RolesAuthGuard implements CanActivate {
       return true;
     }
 
-    if (roles && data.user.roles.some((role) => roles.includes(role.value))) {
+    if (roles && roles.includes(data.user.role)) {
       return true;
     }
 

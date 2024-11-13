@@ -27,20 +27,28 @@ export class AuthService {
       message: 'hello',
     });
 
-    if(!valid){
+    if (!valid) {
       throw new HttpException('Invalid signature', 400);
     }
 
-    const user = await this.userServise.getUserByAddress(address);
+    let user = await this.userServise.getUserByAddress(address);
+
+    
+    if (!user) {
+      user = await this.userServise.createUser({ address });
+    }
+
+    return {
+      user,
+      accessToken: this.generateAccessToken(user),
+      refreshToken: this.generateRefreshToken(user),
+    };
   }
 
   private generateAccessToken(user: User) {
     return this.jwtServise.sign(
       {
-        user: {
-          ...user.get({ plain: true }),
-          roles: user.roles,
-        },
+        user,
         type: 'access',
       },
       {
@@ -52,10 +60,7 @@ export class AuthService {
   private generateRefreshToken(user: User) {
     return this.jwtServise.sign(
       {
-        user: {
-          ...user.get({ plain: true }),
-          roles: user.roles,
-        },
+        user,
         type: 'refresh',
       },
       {

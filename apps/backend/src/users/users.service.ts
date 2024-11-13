@@ -1,51 +1,36 @@
 import { Body, HttpException, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { Role } from '~/roles/roles.model';
-import { RolesService } from '~/roles/roles.service';
 import { CreateUser, User } from '~/users/users.model';
 import * as bcrypt from 'bcryptjs';
 import { Address } from 'viem';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel(User) private readonly userRepository: typeof User,
-    private roleService: RolesService,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
   getUsers() {
-    return this.userRepository.findAll({ include: [Role] });
+    return this.userRepository.find();
   }
 
   async createUser(dto: CreateUser) {
-    const user = await this.userRepository.create(dto);
-
-    const role = await this.roleService.getRoleByValue('user');
-
-    if (!role) {
-      throw new HttpException('Role not found', 400);
-    }
-
-    user.$set('roles', [role]);
-
-    user.roles = [role];
-
-    return user;
+    return this.userRepository.save(dto);
   }
 
   async getUserByAddress(address: Address) {
     return this.userRepository.findOne({
       where: { address },
-      include: { all: true },
     });
   }
 
   async getUserByEmail(email: string) {
     return this.userRepository.findOne({
       where: { email },
-      include: { all: true },
     });
   }
+
 
   // async addRole(dto: AddUserRoleDTO) {
   //   let user = await this.userRepository.findOne({

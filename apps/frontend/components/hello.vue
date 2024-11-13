@@ -19,6 +19,7 @@
         getStr
       </button>
       <button @click="Pay">Pay</button>
+      <input @change="(e) => sendFile(e.target.files)" type="file" />
     </div>
   </lazy-client-only>
 </template>
@@ -33,13 +34,13 @@ import {
 import type { CreateUserDTO } from "@dapp/dto/dto.user";
 import { etherUnits, getContract, parseEther } from "viem";
 import { config } from "~/configs/configs.wagmi";
-import {demoAbi} from "@dapp/abi/abi.demo";
+import { demoAbi } from "@dapp/abi/abi.demo";
+import axios from "axios";
+import { API } from "~/routes";
 
 const { connectors, connect } = useConnect();
 
 const { address } = useAccount();
-
-
 
 const { $config } = useNuxtApp();
 
@@ -52,6 +53,7 @@ async function getStr() {
 
   const data = await contract.read.getStr();
 }
+
 async function Pay() {
   const client = getPublicClient(config);
 
@@ -64,6 +66,16 @@ async function Pay() {
   const data = await contract.write.pay([], {
     value: parseEther("1"),
   });
+}
+
+async function sendFile(files: FileList) {
+  const formData = new FormData();
+
+  setFiles(formData, files, ["file"]);
+
+  const result = await API.post("/jobs", formData);
+
+  console.log(result);
 }
 </script>
 
