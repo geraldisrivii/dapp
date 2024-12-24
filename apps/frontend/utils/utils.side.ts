@@ -1,7 +1,7 @@
 export function isClientSide() {
-  return process.client || typeof window !== 'undefined'
+  return import.meta.client || typeof window !== 'undefined'
 }
 
 export function isServerSide() {
-  return process.server || typeof window === 'undefined'
+  return import.meta.server || typeof window === 'undefined'
 }

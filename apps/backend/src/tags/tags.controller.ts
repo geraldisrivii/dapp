@@ -12,7 +12,7 @@ export class TagsController {
   
   @Post()
   @UseGuards(AuthGuard, RolesAuthGuard)
-  @UseRoles(RoleDTO.ADMIN)
+  // @UseRoles(RoleDTO.ADMIN)
   createTags(@Body() dto: CreateTag) {
     return this.tagsService.createTag(dto);
   }

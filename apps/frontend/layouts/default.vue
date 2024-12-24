@@ -8,6 +8,7 @@
       <modal-container />
       <safe-teleport to="#modal-container">
         <plates-wallet-connect/>  
+        <plates-choice-role/>  
       </safe-teleport>
     </lazy-client-only>
   </div>

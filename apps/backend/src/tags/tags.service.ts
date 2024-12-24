@@ -12,8 +12,15 @@ export class TagsService {
   createTag(dto: CreateTag) {
     return this.tagRepository.save(dto);
   }
-  
+
   createTags(dto: CreateTag[]) {
     return this.tagRepository.save(dto);
+  }
+
+  async findExistingTags(dto: CreateTag[]) {
+    return await this.tagRepository
+      .createQueryBuilder()
+      .where('label IN (:...labels)', { labels: dto.map((item) => item.label) })
+      .getMany();
   }
 }

@@ -1,4 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { object } from 'zod';
+import * as uuid from 'uuid';
 
 export function SwaggerID(description: string = 'Unique identifier') {
   return function (...args: Parameters<PropertyDecorator>) {
@@ -30,7 +32,15 @@ export function SwaggerValue(description: string = 'Value') {
       example: 'some value',
       description,
     })(...args);
-};
+  };
+}
+
+export function SwaggerEnum(Enum: object) {
+  return function (...args: Parameters<PropertyDecorator>) {
+    return ApiProperty({
+      example: Object.values(Enum).at(0),
+    })(...args);
+  };
 }
 
 export function SwaggerBoolean(description?: string) {
@@ -41,7 +51,37 @@ export function SwaggerBoolean(description?: string) {
 
 export function SwaggerAddress(description?: string) {
   return function (...args: Parameters<PropertyDecorator>) {
-    return ApiProperty({ example: '0x65374Fb4bB7e813d8C37...244bA5EDFB019eD0', description })(...args);
+    return ApiProperty({
+      example: '0x65374Fb4bB7e813d8C37...244bA5EDFB019eD0',
+      description,
+    })(...args);
   };
 }
 
+export function SwaggerToken(description?: string) {
+  return function (...args: Parameters<PropertyDecorator>) {
+    return ApiProperty({
+      example: 'eyJiOiJIJ9...FGP0hxknuvDBlrYGu4J8c0CM',
+      description,
+    })(...args);
+  };
+}
+
+export function SwaggerFile(description?: string) {
+  return function (...args: Parameters<PropertyDecorator>) {
+    return ApiProperty({
+      example: uuid.v4() + ['.png', '.jpg'].at(Math.floor(Math.random() * 2)),
+      description,
+    })(...args);
+  };
+}
+
+
+export function SwaggerDate(description?: string) {
+  return function (...args: Parameters<PropertyDecorator>) {
+    return ApiProperty({
+      example: new Date().toISOString(),
+      description,
+    })(...args);
+  };
+}

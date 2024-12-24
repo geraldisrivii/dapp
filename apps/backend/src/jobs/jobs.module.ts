@@ -7,6 +7,7 @@ import { FilesModule } from '~/files/files.module';
 import { AttachmentsModule } from '~/attachments/attachments.module';
 import { AuthModule } from '~/auth/auth.module';
 import { TagsModule } from '~/tags/tags.module';
+import { CategoryModule } from '~/category/category.module';
 
 @Module({
   imports: [
@@ -15,6 +16,8 @@ import { TagsModule } from '~/tags/tags.module';
     AttachmentsModule,
     AuthModule,
     TagsModule,
+    CategoryModule,
+    AuthModule,
   ],
   controllers: [JobsController],
   providers: [JobsService],

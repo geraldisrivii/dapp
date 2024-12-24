@@ -7,5 +7,5 @@ export interface CreateTagDTO {
 export interface TagDTO {
   id: number;
   label: string;
-  job: JobDTO;
+  jobs: JobDTO;
 }

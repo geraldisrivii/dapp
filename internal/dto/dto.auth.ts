@@ -6,4 +6,13 @@ export interface AuthDTO {
   user: UserDTO;
 }
 
+export interface TokenDTO {
+  user: UserDTO
+  type: "access" | "refresh";
+  iat: number;
+  exp: number;
+}
 
+export interface RefreshDTO {
+  refresh: string;
+}

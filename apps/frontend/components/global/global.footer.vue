@@ -31,7 +31,7 @@ const onSubmit = handleSubmit((form) => {});
               type="submit"
               variant="rounded"
             >
-              <span class="mr-3">subscribe </span>
+              <span class="mr-3 text-white">subscribe </span>
               <icon-wrapper width="7" height="9" stroke="white">
                 <icons-arrow />
               </icon-wrapper>

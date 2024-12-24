@@ -3,9 +3,12 @@ version: '3.0'
 services:
   main:
     container_name: main
-    network_mode: "host"
+    networks:
+      - shared_network
     build:
       context: .
+    ports:
+      - "3002:3002"
     volumes:
       - ../../:/app
     command: npm run start:dev
@@ -14,8 +17,11 @@ services:
     restart: always
   postgres:
     container_name: postgres
-    network_mode: "host"
     image: postgres
+    networks:
+      - shared_network
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: 'root'
       POSTGRES_DB: 'nest'
@@ -24,11 +30,17 @@ services:
   adminer:
     image: adminer
     restart: always
-    network_mode: "host"
+    ports:
+      - "8080:8080"
+    networks:
+      - shared_network
     environment:
       - ADMINER_DEFAULT_SERVER=postgres
 
 volumes:
   pgdata:
 
+networks:
+  shared_network:
+    external: true
 

@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { CreateTagDTO, TagDTO } from '@dapp/dto/dto.tag';
 import { SwaggerID, SwaggerValue } from '~/swager/swager.decorators';
 import { IsString } from 'class-validator';
@@ -20,6 +20,6 @@ export class Tag implements TagDTO {
   @Column()
   label: string;
 
-  @ManyToOne(() => Job, (job) => job.tags)
-  job: JobDTO;
+  @ManyToMany(() => Job)
+  jobs: JobDTO;
 }

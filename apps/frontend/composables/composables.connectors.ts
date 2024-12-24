@@ -1,3 +1,4 @@
+import { RoleDTO } from "@dapp/dto/dto.role";
 import { reactify } from "@vueuse/core";
 import { getConnectors, getWalletClient } from "@wagmi/core";
 import { useAccount } from "@wagmi/vue";
@@ -26,23 +27,6 @@ export function useConnectors() {
     }
 
     await installedConnector.value.connect();
-
-    const walletClient = await getWalletClient(config);
-
-    const signature = await walletClient.signMessage({
-      message: "hello",
-    });
-
-    if (!address.value) {
-      return;
-    }
-
-    const response = singup({
-      address: address.value,
-      signature,
-    });
-
-    console.log(response);
   }
 
   return {

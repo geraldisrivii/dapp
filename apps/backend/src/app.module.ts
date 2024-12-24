@@ -8,13 +8,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { source } from '~/config/config.data-source';
 import { JobsModule } from './jobs/jobs.module';
 import { Job } from '~/jobs/jobs.model';
-import { AttachmentsService } from './attachments/attachments.service';
 import { AttachmentsModule } from './attachments/attachments.module';
 import { Attachment } from '~/attachments/attachments.model';
-import { FilesService } from './files/files.service';
 import { FilesModule } from './files/files.module';
 import { TagsModule } from './tags/tags.module';
 import { Tag } from '~/tags/tag.model';
+import { CategoryModule } from './category/category.module';
+import { Category } from './category/category.model';
 
 const config = new ConfigService();
 
@@ -26,7 +26,7 @@ const config = new ConfigService();
     }),
     TypeOrmModule.forRoot({
       ...source.options,
-      entities: [User, Job, Attachment, Tag],
+      entities: [User, Job, Attachment, Tag, Category],
     }),
     UsersModule,
     AuthModule,
@@ -34,6 +34,7 @@ const config = new ConfigService();
     AttachmentsModule,
     FilesModule,
     TagsModule,
+    CategoryModule,
   ],
   controllers: [],
 })

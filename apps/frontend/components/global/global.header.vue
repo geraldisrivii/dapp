@@ -17,17 +17,21 @@ onMounted(async () => {});
   <div class="header bg-white">
     <div class="container mx-auto py-3.5 flex justify-between items-center">
       <div class="flex items-center gap-2.5">
-        <p class="font-sherif text-4xl">freelance</p>
-        <icon-wrapper>
-          <icons-eth />
-        </icon-wrapper>
+        <router-link to="/" class="flex items-center gap-2">
+          <p class="font-sherif text-4xl">freelance</p>
+          <icon-wrapper>
+            <icons-eth />
+          </icon-wrapper>
+        </router-link>
         <nav class="pl-10">
-          <ul class="flex font-medium text-[15px] [&*]text-[#00072D] [&*]text-opacity-80 gap-5">
+          <ul
+            class="flex font-medium text-[15px] [&*]text-[#00072D] [&*]text-opacity-80 gap-5"
+          >
             <li>
               <button class="uppercase">create an order</button>
             </li>
             <li>
-              <router-link class="uppercase" to="/orders"
+              <router-link class="uppercase" to="/jobs"
                 >ACTIVE orders</router-link
               >
             </li>

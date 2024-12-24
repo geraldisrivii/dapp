@@ -4,13 +4,23 @@ import { useAccount } from "@wagmi/vue";
 import { getModalById } from "~/components/modal";
 import { config } from "~/configs/configs.wagmi";
 import { connectors } from "~/constants/constants.connectors";
-import { PLATE_WALLET_CONNECT } from "~/constants/constants.plates";
+import {
+  PLATE_CHOICE_ROLE,
+  PLATE_WALLET_CONNECT,
+} from "~/constants/constants.plates";
 import { singup } from "~/routes/routes.auth";
 import type { VisibleConnector } from "~/types/constants/types-constants.connectors";
 
 const modal = getModalById(PLATE_WALLET_CONNECT);
+const modalChoiceRole = getModalById(PLATE_CHOICE_ROLE);
 
 const { isInstalled, connect } = useConnectors();
+
+async function onConnect(connector: VisibleConnector) {
+  await connect(connector);
+  modal?.setState(false);
+  setTimeout(() => modalChoiceRole?.setState(true), 500);
+}
 </script>
 
 <template>
@@ -23,7 +33,7 @@ const { isInstalled, connect } = useConnectors();
       class="w-full max-w-[500px] md:w-[500px] min-h-[300px] flex flex-col gap-2.5 pt-[30px]"
     >
       <button
-        @click="connect(connector)"
+        @click="onConnect(connector)"
         class="flex justify-between items-center p-2.5 border rounded-md border-gray-500"
         v-for="connector in connectors"
         :key="connector.name"

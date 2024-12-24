@@ -4,6 +4,7 @@ import * as bcrypt from 'bcryptjs';
 import { Address } from 'viem';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { RoleDTO } from '@internal/dto/dto.role';
 
 @Injectable()
 export class UsersService {
@@ -25,12 +26,17 @@ export class UsersService {
     });
   }
 
+  async getUserByAddressAndRole(address: Address, role: RoleDTO) {
+    return this.userRepository.findOne({
+      where: { address, role },
+    });
+  }
+  
   async getUserByEmail(email: string) {
     return this.userRepository.findOne({
       where: { email },
     });
   }
-
 
   // async addRole(dto: AddUserRoleDTO) {
   //   let user = await this.userRepository.findOne({

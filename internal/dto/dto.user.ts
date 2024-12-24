@@ -8,6 +8,7 @@ export interface CreateUserDTO {
 export interface SignUpByWalletDTO {
   address: Address;
   signature: Address;
+  role: RoleDTO
 }
 
 export interface UserDTO {
@@ -18,6 +19,8 @@ export interface UserDTO {
   banned: boolean;
 
   bannedReason: string;
+
+  address: Address;
 
   role: RoleDTO;
 }

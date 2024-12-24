@@ -42,10 +42,10 @@ defineExpose({
 </script>
 
 <template>
-  <transition>
+  <transition name="fade">
     <div
       v-if="state"
-      class="bg-white rounded-[10px] p-6 min-w-[350px] min-h-[270px] flex gap-4"
+      class="bg-white rounded-[10px] p-6 min-w-[350px] min-h-[150px] flex gap-4"
       :class="{ 'template-fullscreen': fullscreen }"
       ref="modalTemplateRef"
     >

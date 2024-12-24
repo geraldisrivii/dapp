@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<CommonButtonProps>(), {
     class="button text-center rounded-md py-4 px-6 min-w-24"
     :class="`button_${props.variant}`"
   >
-    <span class="text-base flex items-center text-white font-medium">
+    <span class="text-base text-center flex justify-center items-center font-medium">
       <slot />
     </span>
   </button>
@@ -28,11 +28,12 @@ const props = withDefaults(defineProps<CommonButtonProps>(), {
 <style lang="scss" scoped>
 .button {
   &_primary {
-    @apply bg-blue-700;
+    @apply bg-blue-700 text-white;
+
   }
 
   &_outline {
-    @apply border border-b-gray;
+    @apply border border-b-gray text-white;
   }
 
   &_rounded{

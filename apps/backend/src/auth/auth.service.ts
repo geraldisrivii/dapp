@@ -6,12 +6,15 @@ import {
 import {
   HttpException,
   Injectable,
+  Request,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '~/users/users.service';
-import { User } from '~/users/users.model';
+import { Refresh, User } from '~/users/users.model';
 import { publicClient } from '~/constants/constants.client';
+import { TokenDTO } from '@internal/dto/dto.auth';
+import { Request as RequestExpress } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +23,7 @@ export class AuthService {
     private jwtServise: JwtService,
   ) {}
 
-  async signupByWallet({ address, signature }: SignUpByWalletDTO) {
+  async signupByWallet({ address, signature, role }: SignUpByWalletDTO) {
     const valid = await publicClient.verifyMessage({
       address,
       signature,
@@ -31,17 +34,16 @@ export class AuthService {
       throw new HttpException('Invalid signature', 400);
     }
 
-    let user = await this.userServise.getUserByAddress(address);
+    let user = await this.userServise.getUserByAddressAndRole(address, role);
 
-    
     if (!user) {
-      user = await this.userServise.createUser({ address });
+      user = await this.userServise.createUser({ address, role });
     }
 
     return {
       user,
-      accessToken: this.generateAccessToken(user),
-      refreshToken: this.generateRefreshToken(user),
+      access: this.generateAccessToken(user),
+      refresh: this.generateRefreshToken(user),
     };
   }
 
@@ -67,5 +69,21 @@ export class AuthService {
         expiresIn: '10d',
       },
     );
+  }
+
+  refresh(dto: Refresh) {
+    try {
+      const result = this.jwtServise.verify<TokenDTO>(dto.refresh);
+  
+      const { user } = result;
+  
+      return {
+        access: this.generateAccessToken(user),
+        refresh: this.generateRefreshToken(user),
+        user,
+      };
+    } catch (e: any) {
+      throw new UnauthorizedException(e.message);
+    }
   }
 }
